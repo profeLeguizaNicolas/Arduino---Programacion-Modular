@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Imagenes/imagen1.png" type="image/x-icon">
+    <title>Arduino - Programacion modular</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Arduino.</h1>
+    <div class="center">
+        <img src="Imagenes/imagen1.png" alt="">
+    </div>
+    <h2>Arduino - Programación Modular.</h2>
+    <ol>
+        <li>
+            <p>
+                La <b>programación modular</b> consiste e dividir un programa grande en pequeñas partes llamadas módulos. Cada módulo se encarga de realizar una tarea específica.
+            </p>
+            <p>
+                En <span class="celeste">Arduino</span>, una de las principales herramientas para trabajar de forma modular son las funciones.
+            </p>
+            <p>
+                En lugar de escribir todo el código dentro de <code class="gris">setup()</code> y <code class="gris">loop()</code>, podemos crear funciones para separar las distintas tareas del programa.
+            </p>
+            <p>
+                Por ejemplo, un programa podría tener una función para:
+            </p>
+            <ol>
+                <li>
+                    Encerder un LED.
+                </li>
+                <li>
+                    Apagar un LED.
+                </li>
+                <li>
+                    Leer un botón.
+                </li>
+                <li>
+                    Mostrar un mensaje.
+                </li>
+                <li>
+                    Calcular un valor.
+                </li>
+            </ol>
+            <p>
+                Esto permite que el código sea más ordenado, fácil de leer, reutilizable y sencillo de modificar.
+            </p>
+            <b>Ejemplo sin funciones</b>
+            <br>
+<pre><code class="cpp">    <span class="celeste">void</span> <span class="naranja">setup</span>(){
+        <span class="naranja">pinMode</span>(<span class="celeste">13</span>, OUTPUT);
+    }
+
+    <span class="celeste">void</span> <span class="naranja">loop</span>(){
+        <span class="naranja">digitalWrite</span>(<span class="celeste">13</span>, HIGH);
+        <span class="naranja">delay</span>( <span class="celeste">1000</span>);
+        
+        <span class="naranja">digitalWrite</span>(<span class="celeste">13</span>, LOW);
+        <span class="naranja">delay</span>(<span class="celeste">1000</span>);
+    }</code></pre> <br>
+        <p>
+            Todo el funcionamiento está escrito directamente dentro del <code class="gris">loop()</code>.
+        </p>
+        <b>Ejemplo utilizando una función</b>.<br>
+<pre><code class="cpp">    <span class="celeste">void</span> <span class="naranja">parpadear</span>(){
+        <span class="naranja">digitalWrite</span>(<span class="celeste">13</span>, HIGH);
+        <span class="naranja">delay</span>(<span class="celeste">1000</span>);
+    
+        <span class="naranja">digitalWrite</span>(<span class="celeste">13</span>, LOW);
+        <span class="naranja">delay</span>(<span class="celeste">1000</span>);
+    }
+    <span class="celeste">void</span> <span class="naranja">setup</span>(){
+        <span class="naranja">pinMode</span>(<span class="celeste">13</span>, OUTPUT);
+    }
+    
+    <span class="celeste">void</span> <span class="naranja">loop</span>(){
+        <span class="naranja">parpadear</span>();
+    }</code></pre><br>
+    <p>
+        Ahora la tarea de haccer parpadear el LED está separada en una función.
+    </p>
+    <p>
+        La función puede ser llamada todas las veces que sea necesario:
+    </p>
+
+<pre><code class="cpp">    <span class="naranja">loop</span>(){
+        <span class="naranja">parpadear</span>();
+        <span class="naranja">parpadear</span>();
+        <span class="naranja">parpadear</span>();
+        <span class="naranja">parpadear</span>();
+    }</code></pre>
+    <br>
+    <hr>
+    <br>
+        </li>
+
+
+        <li>
+            <h3>Estructura de una función.</h3>
+            <p>
+                Una función puede tener diferentes elementos:
+            </p>
+<pre><code class="cpp">    tipo <span class="naranja">nombre</span>(parámetros) {
+        <span class="gris">// instrucciones</span>
+    }</code></pre><br>
+            <p>
+                Por ejemplo:
+            </p>
+<pre><code class="cpp">    <span class="celeste">void</span> <span class="naranja">encender</span>(){
+        <span class="naranja">digitalWrite</span>(<span class="celeste">13</span>, HIGH);
+    }</code></pre><br>
+            <p>En este caso:</p>
+            <ul>
+                <li>
+                    <code class="gris">void</code> → Indica que la función no devuelve ningín valor.
+                </li>
+                <li>
+                    <code class="gris">encender</code> → Es el nombre de la función.
+                </li>
+                <li>
+                    <code class="gris">()</code> → Indica que la función no recibe parámetros.
+                </li>
+                <li>
+                    <code class="gris">{ }</code> → Contienen las instrucciones que ejecutará la función.
+                </li>
+            </ul>
+            <p>
+                Para ejecutar la función:
+            </p>
+<pre><code class="cpp">    <span class="naranja">encender</span>();</code></pre>
+            <br>
+            <hr>
+            <br>
+        </li>
+        <li>
+            <h3>
+                Función sin parámetros y sin retorno
+            </h3>
+            <p>
+                Es el tipo de función más sencilla.
+            </p>
+            <p>
+                La función no recibe información y no devuelve ningún resultado.
+            </p>
+            <b>
+                Ejemplo:
+            </b><br>
+<pre><code class="cpp">    <span class="celeste">void</span> <span class="naranja">encenderLed</span>(){
+        <span class="naranja">digitalWrite</span>(<span class="celeste">13</span>, HIGH);
+    }</code></pre><br>
+            <p>
+                Para utilizarla:
+            </p>
+<pre><code class="cpp">    <span class="naranja">encenderLed</span>();</code></pre>        <br>
+            <b>Programa completo:</b>
+<pre><code class="cpp">    <span class="celeste">void</span> <span class="naranja">encenderLed</span>() {
+        <span class="naranja">digitalWrite</span>(<span class="celeste">13</span>, HIGH);
+    }
+
+    <span class="celeste">void</span> <span class="naranja">setup</span>(){
+            <span class="naranja">pinMode</span>(<span class="celeste">13</span>, OUTPUT);
+    }
+
+    <span class="celeste">void</span> <span class="naranja">loop</span>(){
+        <span class="naranja">encenderLed</span>();
+        <span class="naranja">delay</span>(<span class="celeste">1000</span>);
+    
+        <span class="naranja">digitalWrite</span>(<span class="celeste">13</span>, LOW);
+        <span class="naranja">delay</span>(<span class="celeste">1000</span>);
+    }</code></pre>
+            <br>
+            <p>
+                La función <code class="gris">encenderLed()</code> solamente realiza una acción.
+            </p>
+            <br>
+            <hr>
+            <br>
+        </li>
+        <li>
+            <h3>
+                Función con parámetros y sin retorno.
+            </h3>
+            <p>
+                En este caso, la función recibe información mediante parámetros, pero no devuelve un resultado.
+            </p>
+            <p>
+                Esto permite que una misma función pueda trabajar con diferentes valores.
+            </p>
+            <b>Ejemplo:</b>
+<pre><code class="cpp">    <span class="celeste">void</span> <span class="naranja">encenderLed</span>(<span class="celeste">int</span> pin){
+        <span class="naranja">digitalWrite</span>(pin, HIGH);
+    }</code></pre>
+        <br>
+        <p>
+            La función recibe el número del pin mediante el parámetro <code class="gris">pin</code>.
+        </p>
+        <p>
+            Podemos utilizarla de diferentes maneras:
+        </p>
+<pre><code class="cpp">    <span class="naranja">encenderLed</span>(<span class="celeste">13</span>);</code></pre><br>
+        <p>
+            O
+        </p>
+<pre><code class="cpp">    <span class="naranja">encenderLed</span>(<span class="celeste">0</span>);</code></pre><br>
+        <b>Programa completo:</b>
+<pre><code class="cpp">    <span class="celeste">void</span> <span class="naranja">encenderLed</span>(<span class="celeste">int</span> pin) {
+        <span class="naranja">digitalWrite</span>(pin, HIGH);
+    }
+
+    <span class="celeste">void</span> <span class="naranja">setup</span>(){
+        <span class="naranja">pinMode</span>(<span class="celeste">8</span>, OUTPUT );
+        <span class="naranja">pinMode</span>(<span class="celeste">13</span>, OUTPUT );
+    }
+
+    <span class="celeste">void</span> <span class="naranja">loop</span>(){
+        <span class="naranja">encenderLed</span>(<span class="celeste">8</span>);<span class="naranja">delay</span>(<span class="celeste">1000</span>);
+    
+        <span class="naranja">encenderLed</span>(<span class="celeste">13</span>);<span class="naranja">delay</span>(<span class="celeste">1000</span>);
+    }</code></pre>
+        <br>
+        <p>
+            La función es la misma, pero podemos indicarle sobre qué pin debe trabajar.
+        </p>
+        <br>
+        <hr>
+        <br>
+        </li>
+        <li>
+            <h3>
+                Función sin parámetros y con retorno.
+            </h3>
+            <p>
+                En este caso, la función no recibe información, pero devuelve un valor.
+            </p>
+            <p>
+                Para devolver un resultado se utiliza <code class="gris">return</code>.
+            </p>
+            <b>Ejemplo:</b>
+<pre><code class="cpp">    <span class="celeste">int</span> <span class="naranja">obtenerNumero</span>(){
+    <span class="violeta">return</span> <span class="celeste">10</span>;
+    }</code></pre>
+        <br>
+        <p>
+            La función devuelve el número <code class="gris">10</code>.
+        </p>
+        <p>
+            Podemos guardar ese resultado en una variable:
+        </p>
+<pre><code class="cpp">    <span class="celeste">int</span> numero = <span class="naranja">obtenerNumero</span>();</code></pre><br>
+        <b>Programa completo:</b>
+<pre><code class="cpp">     <span class="celeste">int</span> <span class="naranja">obtenerNumero</span>() {
+        <span class="violeta">return</span> <span class="celeste">10</span>;
+    }
+
+    <span class="celeste">void</span> <span class="naranja">setup</span>(){
+        <span class="naranja">Serial</span>.<span class="naranja">begin</span>(<span class="celeste">9600</span>);
+        <span class="celeste">int</span> numero = <span class="naranja">obtenerNumero</span>();
+        <span class="naranja">Serial</span>.<span class="naranja">println</span>(numero);
+    }
+
+    <span class="celeste">void</span> <span class="naranja">loop</span>(){
+    }</code></pre><br>
+        <p>
+            En el monitor seria se mostrará:
+        </p>
+        <div class="center">
+            <code class="gris">10</code>
+        </div>
+        <p>
+            En este caso utilizamos <code class="gris">int</code> en lugar de <code class="gris">void</code> porque la función devuelve un núumero entero.
+        </p>
+        <br>
+        <hr>
+        <br>
+        </li>
+        <li>
+            <h3>
+                Función con parámetros y con retorno.
+            </h3>
+            <p>
+                Es una de las formas más completas de utilizar una función.
+            </p>
+            <p>
+                La función:
+            </p>
+            <ol>
+                <li>
+                    Recibe uno o más valores
+                </li>
+                <li>
+                    Realiza una operación.
+                </li>
+                <li>
+                    Devuelve un resultado.
+                </li>
+            </ol>
+            <br>
+            <b>Ejemplo</b>
+            <br>
+<pre><code class="cpp">    <span class="celeste">int</span> <span class="naranja">sumar</span>(<span class="celeste">int</span> a,<span class="celeste">int</span> b) {
+    <span class="violeta">return</span> a + b;
+    }</code></pre>
+        <br>
+        <p>
+            La función recibe dos números y devuelve su suma.
+        </p>
+        <p>
+            Podemos utilizarla de esta manera:
+        </p>
+<pre><code class="cpp">    <span class="celeste">int</span> resultado = <span class="naranja">sumar</span>(<span class="celeste">5</span>, <span class="celeste">3</span>);</code></pre>
+        <br>
+        <p>
+            El valor almacenado en <code class="gris">resultado</code> será:
+        </p>
+        <div class="center">
+            <code class="gris">8</code>
+        </div>
+        <b>Programa completa.</b>
+        <br>
+<pre><code class="cpp">    <span class="celeste">int</span> <span class="naranja">sumar</span>(<span class="celeste">int</span> a, <span class="celeste">int</span> b) {
+        <span class="violeta">return</span> a + b;
+    }
+
+    <span class="celeste">void</span> <span class="naranja">setup</span>(){
+        <span class="naranja">Serial</span><span class="naranja">begin</span>(<span class="celeste">9600</span>);
+        <span class="celeste">int</span> resultado = <span class="naranja">sumar</span>(<span class="celeste">5</span>, <span class="celeste">3</span>);
+        <span class="naranja">Serial</span>.<span class="naranja">println</span>(numero);
+    }
+
+    <span class="celeste">void</span> <span class="naranja">loop</span>(){
+    }</code></pre>
+        <br>
+        Resultado: <code class="gris">8</code>
+        
+    </li>
+    <li>
+        <h3>
+            Resumen de los cuatro tipos
+        </h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tipo de función</th>
+                    <th>Parámetros</th>
+                    <th>Retorno</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code class="gris">void encender()</code>
+                    </td>
+                    <td>
+                        No
+                    </td>
+                    <td>
+                        No
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code class="gris">void encender(int pin)</code>
+                    </td>
+                    <td>
+                        Sí
+                    </td>
+                    <td>
+                        No
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code class="gris">int obtenerNumero()</code>
+                    </td>
+                    <td>
+                        No
+                    </td>
+                    <td>
+                        Sí
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <code class="gris">int sumar(int a, int b)</code>
+                    </td>
+                    <td>
+                        Sí
+                    </td>
+                    <td>
+                        Sí
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <p>
+            Una forma sencilla de recordarlos es:
+        </p>
+        <p>
+            Parámetros → Información que entra a la función.
+        </p>
+        <p>
+            Retorno → Información que sale de la función.
+        </p>
+    </li>
+    </ol>
+    <fieldset>
+        <legend>Ejercicios</legend>
+        <ol>
+            <li>
+                <p>
+                    Realizar un programa que controle tres LEDs conectados a los pines <b>8</b>, <b>9</b> y <b>10</b>, utilizando dos funciones sin parámetros llamadas <code class="gris">encenderTodos()</code> y <span class="gris">apagarTodos()</span>. La primera función debe encender los tres LEDs y la segunda debe apagarlos. El programa debe encender los tres LEDs, esperar 2 segundos, apagarlos, esperar 2 segundos y repetir el proceso.
+                </p>
+                <br>
+                <hr>
+            </li>
+            <li>
+                <p>
+                    Conectar un botón al <b>pin 7</b> y un LED al <b>pin 13</b>. Crear una función llamada <code class="gris">leerBoton()</code> que lea el estado del botón y retorne el valor obtenido. En el <code class="gris">loop()</code>, utilizar el valor retornado para encender el LED cuando el botón esté presionado y apagarlo cuando no lo esté. Además, mostrar el estado del botón en el <b>Monitor Serial</b>.
+                </p>
+                <br>
+                <hr>
+            </li>
+            <li>
+                <p>
+                    Conectar un LCD 16x2 y un LED al <b>pin 13</b>. Crear una función llamada <code class="gris">mostrarMensaje()</code> que reciba como parámetros un texto y un número de fila, y muestre el texto recibido en la fila indicada del LCD. En <code class="gris">setup()</code> mostrar <b>"Sistema listo"</b> en la primera fila y <b>"Arduino"</b> en la segunda.
+                </p>
+                <b>
+                    Ayuda:
+                </b>
+                <br>
+                <p>
+                    Llamado de la función en el <code class="gris">setup()</code>:
+                </p>
+<pre><code class="cpp">   <span class="naranja">mostrarMensaje</span>(<span class="celeste">"Sistema listo"</span>, 0);
+<span class="naranja">mostrarMensaje</span>(<span class="celeste">"Arduino"</span>, 1);</code></pre>
+            <br>
+            <hr>
+            </li>
+            <li>
+                <p>
+                    Conectar un botón al <b>pin 7</b>, un LED al <b>pin 13</b> y un <b>LCD 16x2 I2C</b>. Crear una función llamada <code class="gris">leerEstado()</code> que reciba como parámetro el número de pin del botón y retorne su estado. En <code class="gris">loop()</code>, utilizar el valor retornado para encender o apagar el LED y mostrar en el LCD <i>"Presionado"</i> o <i>"Sin presionar"</i> según corresponda.
+                </p>
+               <br>
+               <hr>
+            </li>
+            <li>
+                <p>
+                    Realizar un programa que permita controlar mediante <b>Bluetooth</b> un menú de navegación mostrado en una pantalla <b>LCD 16x2</b>. En la primera fila deberá aparecer <siemprecode class="gris">Menu:</siemprecode> y en la segunda fila se mostrará la opción seleccionada con el formato <code class="gris">&lt; Iniciar &gt;</code>. Las opciones disponibles serán <code class="gris">Iniciar</code>, <code class="gris">Detener</code>, <code class="gris">Modelo</code> y <code class="gris">Salir</code>. Para desplazarse entre las opciones se deberán recibir mediante Bluetooth los caracteres <code>A</code> para desplazarse hacia la izquierda y <code>D</code> para desplazarse hacia la derecha. Al alcanzar la primera o última opción, el desplazamiento deberá continuar de forma circular, volviendo a la última o primera opción respectivamente.
+                </p>
+                <p>
+                    Crear una función sin parámetros llamada <code class="gris">leerBluetooth()</code> que lea un carácter recibido mediante <b>Bluetooth</b> y retorne dicho carácter. El valor retornado deberá almacenarse en una variable y posteriormente enviarse como parámetro a una función llamada <code class="gris">menu()</code>. Esta función deberá recibir además el estado de un pulsador utilizado para ingresar a la opción seleccionada. Según el carácter recibido, deberá actualizar la opción mostrada en el <b>LCD</b> y, si el pulsador de ingreso se encuentra presionado, deberá ejecutar la acción correspondiente. Al seleccionar <code class="gris">Iniciar</code>, deberá mostrar durante dos segundos <i>Iniciando...</i>; al seleccionar <code class="gris">Detener</code>, deberá mostrar durante dos segundos <i>Deteniendo...</i>; al seleccionar <code class="gris">Modelo</code>, deberá mostrar <code class="gris">PHC530</code> y luego regresar automáticamente al menú principal. Finalmente, al seleccionar <code class="gris">Salir</code> y presionar el pulsador de ingreso, deberá mostrar <code class="gris">Hasta luego!</code> y finalizar el funcionamiento del menú.
+                </p>
+                <p>
+                    La función <code class="gris">leerBluetooth()</code> deberá ser una función <b>sin parámetros</b> y con <b>retorno</b> del tipo char, mientras que la función <code class="gris">menu()</code> deberá ser una función con <b>parámetros</b> y sin <b>retorno</b>.
+                </p>
+            </li>
+        </ol>
+    </fieldset>
+</body>
+</html>
